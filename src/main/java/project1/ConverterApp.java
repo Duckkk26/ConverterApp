@@ -13,7 +13,9 @@ public class ConverterApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("home"), 500, 750);
+        scene = new Scene(loadFXML("number"), 500, 750);
+        stage.setTitle("Converter App");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

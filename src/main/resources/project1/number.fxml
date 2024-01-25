@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="500.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f9fbff; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, gray , 10, 0.0, 1, 1 );" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <Text fill="#4daee1" layoutX="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TO" textAlignment="CENTER" AnchorPane.topAnchor="40.0">
+               <font>
+                  <Font name="Microsoft YaHei Light" size="18.0" />
+               </font>
+            </Text>
+            <TextField promptText="Enter number..." style="-fx-background-color: #eef2ff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="105.0">
+               <font>
+                  <Font name="Microsoft YaHei Light" size="18.0" />
+               </font>
+            </TextField>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ComboBox prefWidth="150.0" stylesheets="@CSS/TextFieldComboBox.css" />
+                  <ComboBox prefWidth="150.0" stylesheets="@CSS/TextFieldComboBox.css" />
+               </children>
+            </HBox>
+         </children></AnchorPane>
+      <ImageView fitHeight="282.0" fitWidth="1000.0" layoutX="-187.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" style="-fx-view-order: 1;" AnchorPane.leftAnchor="-187.0" AnchorPane.rightAnchor="-186.96282958984375">
+         <image>
+            <Image url="@z5080134966105_13112436dbcf36d7567ee2f7ab7f5c28.jpg" />
+         </image>
+      </ImageView>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, gray , 10, 0.0, 1, 1 );" stylesheets="@CSS/Button.css" text="CONVERT" textAlignment="CENTER" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="270.0">
+         <font>
+            <Font name="Microsoft YaHei Light" size="18.0" />
+         </font>
+      </Button>
+      <VBox layoutX="94.0" layoutY="375.0" prefHeight="200.0" prefWidth="180.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="350.0">
+         <children>
+            <Text fill="#2f8ed2" layoutX="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hex number" textAlignment="CENTER">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="14.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="50.0" prefWidth="399.0">
+               <children>
+                  <TextArea editable="false" prefHeight="39.0" prefWidth="340.0" stylesheets="@CSS/TextFieldComboBox.css" wrapText="true">
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                  </TextArea>
+                  <TextField alignment="CENTER" editable="false" prefHeight="200.0" prefWidth="60.0" stylesheets="@CSS/TextFieldComboBox.css" />
+               </children>
+            </HBox>
+            <Text fill="#2f8ed2" strokeType="OUTSIDE" strokeWidth="0.0" text="Hex signed 2's complement" textAlignment="CENTER">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="14.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="50.0" prefWidth="399.0">
+               <children>
+                  <TextArea editable="false" prefHeight="39.0" prefWidth="340.0" stylesheets="@CSS/TextFieldComboBox.css" wrapText="true">
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                  </TextArea>
+                  <TextField alignment="CENTER" editable="false" prefHeight="200.0" prefWidth="60.0" stylesheets="@CSS/TextFieldComboBox.css" />
+               </children>
+            </HBox>
+            <Text fill="#2f8ed2" strokeType="OUTSIDE" strokeWidth="0.0" text="Binary number" textAlignment="CENTER">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="14.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <TextArea prefHeight="39.0" prefWidth="340.0" stylesheets="@CSS/TextFieldComboBox.css">
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                  </TextArea>
+                  <TextField alignment="CENTER" editable="false" prefHeight="200.0" prefWidth="60.0" stylesheets="@CSS/TextFieldComboBox.css" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
