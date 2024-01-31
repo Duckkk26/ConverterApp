@@ -35,17 +35,16 @@ public class Hexadecimal extends BaseModel {
     }
 
     private static void convertNumberPart() {
-        int temp = number;
+        int temp = Math.abs(number);
         StringBuilder stringBuilder = new StringBuilder();
-        if (number < 0) {
-            stringBuilder.append("-");
-            temp = -temp;
-        }
         do {
             int r = temp % 16;
-            stringBuilder.insert(1, list.get(r));
+            stringBuilder.insert(0, list.get(r));
             temp /= 16;
         } while (temp != 0);
+        if (number < 0) {
+            stringBuilder.insert(0, "-");
+        }
         numberPart = stringBuilder.toString();
     }
 
@@ -86,5 +85,19 @@ public class Hexadecimal extends BaseModel {
             }
         }
         return signedNum.toString();
+    }
+
+    public static String parseDecimalFromSigned(String numStr) {
+        int s = list.indexOf(numStr.charAt(0));
+        int n = numStr.length() - 1;
+        int res = 0;
+        if (s > 7) {
+            res -= (int) ((16 - s) * Math.pow(16, n));
+            for (int i = 1; i <= n; i++) {
+                res += (int) (list.indexOf(numStr.charAt(i)) * Math.pow(16, n - i));
+            }
+            return String.valueOf(res);
+        }
+        return Decimal.convert();
     }
 }

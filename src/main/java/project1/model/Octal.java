@@ -1,7 +1,5 @@
 package project1.model;
 
-import java.util.List;
-
 public class Octal extends BaseModel {
     public static void parse(String numStr) {
         subNum(numStr);
@@ -13,6 +11,7 @@ public class Octal extends BaseModel {
         number = 0;
         int n = numberPart.length() - 1;
         for (int i = 0; i <= n; i++) {
+            if (numberPart.charAt(i) == '-') continue;
             number += (int) (Integer.parseInt("" + numberPart.charAt(i)) * Math.pow(8, n - i));
         }
     }
@@ -32,17 +31,16 @@ public class Octal extends BaseModel {
     }
 
     private static void convertNumberPart() {
-        int temp = number;
+        int temp = Math.abs(number);
         StringBuilder stringBuilder = new StringBuilder();
-        if (number < 0) {
-            stringBuilder.append("-");
-            temp = -temp;
-        }
         do {
             int r = temp % 8;
-            stringBuilder.insert(1, r);
+            stringBuilder.insert(0, r);
             temp /= 8;
         } while (temp != 0);
+        if (number < 0) {
+            stringBuilder.insert(0, "-");
+        }
         numberPart = stringBuilder.toString();
     }
 

@@ -1,7 +1,5 @@
 package project1.model;
 
-import java.util.List;
-
 public class Binary extends BaseModel {
     public static void parse(String numStr) {
         subNum(numStr);
@@ -13,6 +11,7 @@ public class Binary extends BaseModel {
         number = 0;
         int n = numberPart.length() - 1;
         for (int i = 0; i <= n; i++) {
+            if (numberPart.charAt(i) == '-') continue;
             number += (int) (Integer.parseInt("" + numberPart.charAt(i)) * Math.pow(2, n - i));
         }
     }
@@ -32,17 +31,16 @@ public class Binary extends BaseModel {
     }
 
     private static void convertNumberPart() {
-        int temp = number;
+        int temp = Math.abs(number);
         StringBuilder stringBuilder = new StringBuilder();
-        if (number < 0) {
-            stringBuilder.append("-");
-            temp = -temp;
-        }
         do {
             int r = temp % 2;
-            stringBuilder.insert(1, r);
+            stringBuilder.insert(0, r);
             temp /= 2;
         } while (temp != 0);
+        if (number < 0) {
+            stringBuilder.insert(0, "-");
+        }
         numberPart = stringBuilder.toString();
     }
 
@@ -56,5 +54,43 @@ public class Binary extends BaseModel {
             stringBuilder.append(s);
         } while (temp != 0.0 && stringBuilder.length() != 20);
         fractionalPart = stringBuilder.toString();
+    }
+
+    public static String convertSigned() {
+        StringBuilder signedNum = new StringBuilder();
+        convertNumberPart();
+        if (numberPart.startsWith("-")) {
+            int r = 1;
+            for (int i = numberPart.length() - 1; i >0; i--) {
+                char c = (numberPart.charAt(i) == '1') ? '0' : '1';
+                if (c == '1' && r == 1) {
+                    c = '0';
+                } else {
+                    c = (char) (c + r);
+                    r = 0;
+                }
+                signedNum.insert(0, c);
+            }
+            if (signedNum.charAt(0) == '0') signedNum.insert(0, '1');
+            while (signedNum.length() != 16 && signedNum.length() != 32 && signedNum.length() != 64) {
+                signedNum.insert(0, '1');
+            }
+        } else {
+            while (signedNum.length() != 16 && signedNum.length() != 32 && signedNum.length() != 64) {
+                signedNum.insert(0, '0');
+            }
+        }
+        return signedNum.toString();
+    }
+
+    public static String parseDecimalFromSigned(String numStr) {
+        int s = Integer.parseInt("" + numStr.charAt(0));
+        int n = numStr.length() - 1;
+        int res = 0;
+        res -= (int) (s * Math.pow(2, n));
+        for (int i = 1; i <= n; i++) {
+            res += (int) (Integer.parseInt("" + numStr.charAt(i)) * Math.pow(2, n - i));
+        }
+        return String.valueOf(res);
     }
 }
