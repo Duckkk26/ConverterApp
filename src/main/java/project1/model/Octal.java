@@ -40,7 +40,7 @@ public class Octal extends BaseModel {
         }
         do {
             int r = temp % 8;
-            stringBuilder.insert(0, r);
+            stringBuilder.insert(1, r);
             temp /= 8;
         } while (temp != 0);
         numberPart = stringBuilder.toString();

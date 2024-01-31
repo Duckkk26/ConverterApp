@@ -40,7 +40,7 @@ public class Binary extends BaseModel {
         }
         do {
             int r = temp % 2;
-            stringBuilder.insert(0, r);
+            stringBuilder.insert(1, r);
             temp /= 2;
         } while (temp != 0);
         numberPart = stringBuilder.toString();

@@ -60,4 +60,31 @@ public class Hexadecimal extends BaseModel {
         } while (temp != 0.0 && stringBuilder.length() != 20);
         fractionalPart = stringBuilder.toString();
     }
+
+    public static String convertSigned() {
+        StringBuilder signedNum = new StringBuilder();
+        convertNumberPart();
+        if (numberPart.startsWith("-")) {
+            int r = 1;
+            for (int i = numberPart.length() - 1; i >0; i--) {
+                char c = list.get(15 - list.indexOf(numberPart.charAt(i)));
+                if (c == 'F' && r == 1) {
+                    c = '0';
+                } else {
+                    c = list.get(list.indexOf(c) + r);
+                    r = 0;
+                }
+                signedNum.insert(0, c);
+            }
+            if (list.indexOf(signedNum.charAt(0)) <= 7) signedNum.insert(0, 'F');
+            while (signedNum.length() != 4 && signedNum.length() != 8 && signedNum.length() != 16) {
+                signedNum.insert(0, 'F');
+            }
+        } else {
+            while (signedNum.length() != 4 && signedNum.length() != 8 && signedNum.length() != 16) {
+                signedNum.insert(0, '0');
+            }
+        }
+        return signedNum.toString();
+    }
 }
