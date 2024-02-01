@@ -47,6 +47,7 @@ public class TextController implements Initializable {
     private TextArea decTextArea;
     @FXML
     private TextField length;
+    private List<String> bin = new ArrayList<>();
 
     public void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
@@ -234,7 +235,7 @@ public class TextController implements Initializable {
             Decimal.parse("" + (int) (text.charAt(i)));
             hex.append(Hexadecimal.convert()).append(delimiter);
         }
-        if(!delimiter.isEmpty()) hex.deleteCharAt(hex.length() - 1);
+        if(!delimiter.isEmpty()) hex.deleteCharAt(hex.length() - delimiter.length());
         return hex.toString();
     }
 
@@ -248,8 +249,9 @@ public class TextController implements Initializable {
                 c.insert(0, "0");
             }
             binary.append(c).append(delimiter);
+            bin.add(c.toString());
         }
-        if(!delimiter.isEmpty()) binary.deleteCharAt(binary.length() - 1);
+        if(!delimiter.isEmpty()) binary.deleteCharAt(binary.length() - delimiter.length());
         return binary.toString();
     }
 
@@ -259,13 +261,13 @@ public class TextController implements Initializable {
         for (int i = 0; i < text.length(); i++) {
             dec.append((int) text.charAt(i)).append(delimiter);
         }
-        if(!delimiter.isEmpty()) dec.deleteCharAt(dec.length() - 1);
+        if(!delimiter.isEmpty()) dec.deleteCharAt(dec.length() - delimiter.length());
         return dec.toString();
     }
 
     @FXML
     public void checksum() {
-        int bit;
+        int bit = 8;
         if (bitComboBox.getValue().equals("8-bit")) {
             bit = 8;
         }
@@ -274,6 +276,16 @@ public class TextController implements Initializable {
         }
         else if (bitComboBox.getValue().equals("32-bit")) {
             bit = 32;
+        }
+        for (int i = 0; i < bin.size(); i++) {
+            StringBuilder str = new StringBuilder(bin.get(i));
+            while (str.length() < bit) {
+                str.insert(0, "0");
+            }
+            while (str.length() > bit) {
+                str.deleteCharAt(0);
+            }
+            bin.set(i, str.toString());
         }
 
     }

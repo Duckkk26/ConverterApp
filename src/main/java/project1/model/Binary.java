@@ -99,4 +99,18 @@ public class Binary extends BaseModel {
         }
         return String.valueOf(res);
     }
+
+    public static String sum(List<String> binList) {
+        String res = binList.get(0);
+        for (int i = 1; i < binList.size(); i++) {
+            int r = 0;
+            String binNum = binList.get(i);
+            for (int j = binNum.length() - 1; j >= 0; j--) {
+                if (res.charAt(j) == binNum.charAt(j)) {
+                    res.
+                }
+            }
+        }
+        return res;
+    }
 }
