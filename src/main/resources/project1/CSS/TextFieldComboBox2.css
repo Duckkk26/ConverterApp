@@ -14,10 +14,27 @@
     -fx-background-color: #eef2ff;
 }
 
+.text-area {
+    -fx-font-size:  14px;
+    -fx-font-family: Microsoft YaHei Light;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-display-caret:true;
+    -fx-background-color: #eef2ff, #eef2ff;
+ }
+
+ .text-area .content {
+     -fx-background-color: #eef2ff;
+ }
+
+.text-area:focused .content {
+    -fx-background-color: #eef2ff;
+}
+
 .combo-box{
     -fx-font-size: 14px;
-    -fx-font-family: Microsoft YaHei;
-    -fx-font-weight: 700;
+    -fx-font-family: Microsoft YaHei Light;
+    -fx-font-weight: 500;
 }
 
 .combo-box-base{

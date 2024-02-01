@@ -45,13 +45,8 @@ public class NumberController implements Initializable {
     private TextField textField3;
 
     @FXML
-    public void switchToNumber() throws IOException {
-        ConverterApp.setRoot("number.fxml");
-    }
-
-    @FXML
     public void switchToText() throws IOException {
-        ConverterApp.setRoot("text.fxml");
+        ConverterApp.setRoot("text");
     }
 
 

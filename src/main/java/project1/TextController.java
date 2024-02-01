@@ -47,26 +47,23 @@ public class TextController implements Initializable {
     private TextArea decTextArea;
     @FXML
     private TextField length;
-    private List<String> bin = new ArrayList<>();
-
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
-    }
+    private List<String> binList = new ArrayList<>();
 
     @FXML
     public void switchToNumber() throws IOException {
-        ConverterApp.setRoot("number.fxml");
+        ConverterApp.setRoot("number");
     }
 
     @FXML
     public void switchToText() throws IOException {
-        ConverterApp.setRoot("text.fxml");
+        ConverterApp.setRoot("text");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         delimiterComboBox.setItems(
                 FXCollections.observableArrayList("None", "Space", "Comma", "User defined"));
+        delimiterComboBox.setValue("Space");
         delimiterTextField.setText(" ");
         delimiterTextField.setEditable(false);
         delimiterTextField.textProperty().addListener((observableValue, s, t1) -> {
@@ -78,7 +75,9 @@ public class TextController implements Initializable {
         delimiter = " ";
 
         bitComboBox.setItems(FXCollections.observableArrayList("8-bit", "16-bit", "32-bit"));
+        bitComboBox.setValue("8-bit");
         operationComboBox.setItems(FXCollections.observableArrayList("Sum", "2's complement", "XOR"));
+        operationComboBox.setValue("Sum");
 
         AtomicBoolean enableChangeListening = new AtomicBoolean(true);
 
@@ -249,7 +248,7 @@ public class TextController implements Initializable {
                 c.insert(0, "0");
             }
             binary.append(c).append(delimiter);
-            bin.add(c.toString());
+            binList.add(c.toString());
         }
         if(!delimiter.isEmpty()) binary.deleteCharAt(binary.length() - delimiter.length());
         return binary.toString();
@@ -268,6 +267,7 @@ public class TextController implements Initializable {
     @FXML
     public void checksum() {
         int bit = 8;
+        String res;
         if (bitComboBox.getValue().equals("8-bit")) {
             bit = 8;
         }
@@ -277,16 +277,45 @@ public class TextController implements Initializable {
         else if (bitComboBox.getValue().equals("32-bit")) {
             bit = 32;
         }
-        for (int i = 0; i < bin.size(); i++) {
-            StringBuilder str = new StringBuilder(bin.get(i));
+        for (int i = 0; i < binList.size(); i++) {
+            StringBuilder str = new StringBuilder(binList.get(i));
             while (str.length() < bit) {
                 str.insert(0, "0");
             }
             while (str.length() > bit) {
                 str.deleteCharAt(0);
             }
-            bin.set(i, str.toString());
+            binList.set(i, str.toString());
         }
+        if (operationComboBox.getValue().equals("Sum")) {
+            res = Binary.sum(binList);
+            Binary.parse(res);
+            res = Hexadecimal.convert();
+            resTextField.setText(formatRes(res, bit));
+        }
+        else if (operationComboBox.getValue().equals("2's complement")) {
+            res = "-" + Binary.sum(binList);
+            Binary.parse(res);
+            res = Hexadecimal.convertSigned();
+            resTextField.setText(formatRes(res, bit));
+        }
+        else if (operationComboBox.getValue().equals("XOR")) {
+            res = Binary.xor(binList);
+            Binary.parse(res);
+            res = Hexadecimal.convert();
+            resTextField.setText(formatRes(res, bit));
+        }
+    }
 
+    private String formatRes(String res, int bit) {
+        bit = bit / 4;
+        StringBuilder str = new StringBuilder(res);
+        while (str.length() < bit) {
+            str.insert(0, "0");
+        }
+        while (str.length() > bit) {
+            str.deleteCharAt(0);
+        }
+        return str.toString();
     }
 }

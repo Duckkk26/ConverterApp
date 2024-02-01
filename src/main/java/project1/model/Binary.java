@@ -101,16 +101,45 @@ public class Binary extends BaseModel {
     }
 
     public static String sum(List<String> binList) {
-        String res = binList.get(0);
+        StringBuilder res = new StringBuilder(binList.get(0));
         for (int i = 1; i < binList.size(); i++) {
-            int r = 0;
+            String r = "0";
             String binNum = binList.get(i);
             for (int j = binNum.length() - 1; j >= 0; j--) {
                 if (res.charAt(j) == binNum.charAt(j)) {
-                    res.
+                    res.replace(j, j + 1, r);
+                    r = "0";
+                    if (binNum.charAt(j) == '1') r = "1";
+                } else {
+                    if (r.equals("1")) {
+                        res.replace(j, j +1, "0");
+                    }
+                    else {
+                        res.replace(j, j + 1, "1");
+                    }
                 }
             }
         }
-        return res;
+        return res.toString();
+    }
+
+    public static String xor(List<String> binList) {
+        StringBuilder res = new StringBuilder(binList.get(0));
+        for (int i = 1; i < binList.size(); i++) {
+            String binNum = binList.get(i);
+            for (int j = binNum.length() - 1; j >= 0; j--) {
+                if (res.charAt(j) == binNum.charAt(j)) {
+                    res.replace(j, j + 1, "0");
+                } else {
+                    res.replace(j, j + 1, "1");
+                }
+            }
+        }
+        return res.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(sum(List.of("01100001", "01100010")));
+        System.out.println(xor(List.of("01100001", "01100010")));
     }
 }
