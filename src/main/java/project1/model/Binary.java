@@ -1,5 +1,7 @@
 package project1.model;
 
+import java.util.List;
+
 public class Binary extends BaseModel {
     public static void parse(String numStr) {
         subNum(numStr);
@@ -58,7 +60,8 @@ public class Binary extends BaseModel {
 
     public static String convertSigned() {
         StringBuilder signedNum = new StringBuilder();
-        convertNumberPart();
+        convert();
+        if (!fractionalPart.isEmpty()) return "N/A";
         if (numberPart.startsWith("-")) {
             int r = 1;
             for (int i = numberPart.length() - 1; i >0; i--) {
@@ -76,6 +79,7 @@ public class Binary extends BaseModel {
                 signedNum.insert(0, '1');
             }
         } else {
+            signedNum.append(numberPart);
             while (signedNum.length() != 16 && signedNum.length() != 32 && signedNum.length() != 64) {
                 signedNum.insert(0, '0');
             }
@@ -84,6 +88,8 @@ public class Binary extends BaseModel {
     }
 
     public static String parseDecimalFromSigned(String numStr) {
+        List<Integer> length = List.of(8, 16, 32, 64);
+        if (!length.contains(numStr.length()) || numStr.contains(".")) return "N/A";
         int s = Integer.parseInt("" + numStr.charAt(0));
         int n = numStr.length() - 1;
         int res = 0;
