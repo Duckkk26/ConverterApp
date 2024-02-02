@@ -4,28 +4,22 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import project1.model.Binary;
 import project1.model.Decimal;
 import project1.model.Hexadecimal;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TextController implements Initializable {
-    private File selectedFile;
-    @FXML
-    private Label fileName;
     @FXML
     private ComboBox<String> delimiterComboBox;
     @FXML
@@ -91,6 +85,7 @@ public class TextController implements Initializable {
                     decTextArea.setText(convertToDec(text));
                     enableChangeListening.set(true);
                     length.setText(String.valueOf(asciiTextArea.getText().length()));
+                    checksum();
                 }
             }
         });
@@ -124,6 +119,7 @@ public class TextController implements Initializable {
                     decTextArea.setText(convertToDec(asciiText.toString()));
                     enableChangeListening.set(true);
                     length.setText(String.valueOf(asciiTextArea.getText().length()));
+                    checksum();
                 }
             }
         });
@@ -160,6 +156,7 @@ public class TextController implements Initializable {
                     decTextArea.setText(convertToDec(asciiText.toString()));
                     enableChangeListening.set(true);
                     length.setText(String.valueOf(asciiTextArea.getText().length()));
+                    checksum();
                 }
             }
         });
@@ -179,26 +176,49 @@ public class TextController implements Initializable {
                     binTextArea.setText(convertToBinary(asciiText.toString()));
                     enableChangeListening.set(true);
                     length.setText(String.valueOf(asciiTextArea.getText().length()));
+                    checksum();
                 }
             }
         });
     }
 
     @FXML
-    public void openFileChooser() {
+    public void openFileChooser() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Text File");
-        Stage stage = null;
-        selectedFile = fileChooser.showOpenDialog(stage);
+        File selectedFile = fileChooser.showOpenDialog(null);
+
         if (selectedFile != null) {
-            String strFileName = selectedFile.getName();
-            fileName.setText(strFileName);
-            fileName.setVisible(true);
+            String fileName = selectedFile.getName();
+            if (fileName.endsWith(".txt")) {
+                handleFile(selectedFile);
+            }
+            else {
+                showAlert("File Import", "Wrong Format");
+            }
         }
     }
 
-    public void handleFile() {
+    public void handleFile(File file) throws IOException {
+        try (InputStream is = new FileInputStream(file);
+        InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
+        BufferedReader reader = new BufferedReader(isr);) {
+            StringBuilder content = new StringBuilder();
+            String line = reader.readLine();
+            content.append(line);
+            while ((line = reader.readLine()) != null) {
+                content.append("\n").append(line);
+            }
+            asciiTextArea.setText(content.toString());
+        }
+    }
 
+    public void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
@@ -241,6 +261,7 @@ public class TextController implements Initializable {
     public String convertToBinary(String text) {
         if (text.isEmpty()) return text;
         StringBuilder binary = new StringBuilder();
+        binList = new ArrayList<>();
         for (int i = 0; i < text.length(); i++) {
             Decimal.parse("" + (int) (text.charAt(i)));
             StringBuilder c = new StringBuilder(Binary.convert());

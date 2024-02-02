@@ -16,8 +16,10 @@ public class Hexadecimal extends BaseModel {
         number = 0;
         int n = numberPart.length() - 1;
         for (int i = 0; i <= n; i++) {
+            if (numberPart.charAt(i) == '-') continue;
             number += (int) (list.indexOf(numberPart.charAt(i)) * Math.pow(16, n - i));
         }
+        if (numberPart.charAt(0) == '-') number = -number;
     }
 
     private static void parseFractionalPart() {

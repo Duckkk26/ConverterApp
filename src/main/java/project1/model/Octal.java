@@ -14,6 +14,7 @@ public class Octal extends BaseModel {
             if (numberPart.charAt(i) == '-') continue;
             number += (int) (Integer.parseInt("" + numberPart.charAt(i)) * Math.pow(8, n - i));
         }
+        if (numberPart.charAt(0) == '-') number = -number;
     }
 
     private static void parseFractionalPart() {

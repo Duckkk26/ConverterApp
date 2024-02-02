@@ -52,12 +52,12 @@
             <Image url="@CSS/ba9d5afaca3e6060392f.jpg" />
          </image>
       </ImageView>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, gray , 10, 0.0, 1, 1 );" stylesheets="@CSS/Button.css" text="OPEN FILE" textAlignment="CENTER" AnchorPane.bottomAnchor="630.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="70.0">
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openFileChooser" style="-fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, gray , 10, 0.0, 1, 1 );" stylesheets="@CSS/Button.css" text="OPEN FILE" textAlignment="CENTER" AnchorPane.bottomAnchor="630.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font name="Microsoft YaHei Light" size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="30.0" mnemonicParsing="false" style="-fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, gray , 10, 0.0, 1, 1 );" stylesheets="@CSS/Button.css" text="RESET" textAlignment="CENTER" AnchorPane.bottomAnchor="630.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="70.0">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="30.0" mnemonicParsing="false" onAction="#switchToText" style="-fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, gray , 10, 0.0, 1, 1 );" stylesheets="@CSS/Button.css" text="RESET" textAlignment="CENTER" AnchorPane.bottomAnchor="630.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font name="Microsoft YaHei Light" size="18.0" />
          </font>
