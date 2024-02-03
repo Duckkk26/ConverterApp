@@ -138,19 +138,4 @@ public class Binary extends BaseModel {
         }
         return res.toString();
     }
-
-    public static void main(String[] args) {
-        String res = sum(List.of("01100001", "01100010"));
-        Binary.parse(res);
-        res = Hexadecimal.convert();
-        System.out.println(res);
-        res = "-" + Binary.sum(List.of("01100001", "01100010"));
-        Binary.parse(res);
-        res = Hexadecimal.convertSigned();
-        System.out.println(res);
-        res = xor(List.of("01100001", "01100010"));
-        Binary.parse(res);
-        res = Hexadecimal.convert();
-        System.out.println(res);
-    }
 }
