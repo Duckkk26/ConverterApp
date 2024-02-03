@@ -7,6 +7,8 @@ class BaseModel {
     static double fraction;
 
     static void subNum(String numStr) {
+        numberPart = "";
+        fractionalPart = "";
         String[] list = numStr.split("\\.");
         numberPart = list[0];
         if (list.length == 2) fractionalPart = list[1];

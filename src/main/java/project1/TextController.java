@@ -332,7 +332,11 @@ public class TextController implements Initializable {
         bit = bit / 4;
         StringBuilder str = new StringBuilder(res);
         while (str.length() < bit) {
-            str.insert(0, "0");
+            String c = "0";
+            if (operationComboBox.getValue().equals("2's complement")) {
+                c = "F";
+            }
+            str.insert(0, c);
         }
         while (str.length() > bit) {
             str.deleteCharAt(0);
